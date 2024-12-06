@@ -8,6 +8,7 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,6 +38,9 @@ public class Tela_Login extends javax.swing.JFrame {
         
         System.out.println("CONEXAO"); 
         System.out.println(conexao);
+        
+         
+         
       
             
              
@@ -86,6 +90,7 @@ public class Tela_Login extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
         jButton1.setText("Login");
+        jButton1.setPreferredSize(new java.awt.Dimension(50, 24));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -106,11 +111,11 @@ public class Tela_Login extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(8, 8, 8)))
                 .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(usuarioLabel)
-                        .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -126,11 +131,11 @@ public class Tela_Login extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27))
         );
 
@@ -147,7 +152,30 @@ public class Tela_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_senhaLabelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+  String sql ="select * from clientes where login=? and senha=?";
+            
+            try{
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, usuarioLabel.getText());    
+                pst.setString(2, senhaLabel.getText());
+                
+                rs = pst.executeQuery();
+                
+                if(rs.next()){
+                    JOptionPane.showMessageDialog(null, "Login com Sucesso!");
+                }else{
+                     JOptionPane.showMessageDialog(null, "ERRO de login!");
+                    
+                }
+
+            
+                
+            }catch(Exception e){
+                   
+                  System.out.println("ERROR");
+                
+            }
+                // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
