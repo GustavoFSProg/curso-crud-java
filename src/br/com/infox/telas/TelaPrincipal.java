@@ -27,35 +27,139 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        Desktop = new javax.swing.JDesktopPane();
+        jLabel2 = new javax.swing.JLabel();
+        LblData = new javax.swing.JLabel();
+        LblUsuario = new javax.swing.JLabel();
+        Menu = new javax.swing.JMenuBar();
+        menCad = new javax.swing.JMenu();
+        menCadCli = new javax.swing.JMenuItem();
+        menCadOs = new javax.swing.JMenuItem();
+        menCadUsuarios = new javax.swing.JMenuItem();
+        menRel = new javax.swing.JMenu();
+        menRelServ = new javax.swing.JMenuItem();
+        menAjuda = new javax.swing.JMenu();
+        menAjudaSobre = new javax.swing.JMenuItem();
+        menOpc = new javax.swing.JMenu();
+        menOpcSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ordem de Serviço 1.0");
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabel1.setText("TELA PRINCIPAL");
+        Desktop.setBackground(new java.awt.Color(49, 26, 26));
+        Desktop.setPreferredSize(new java.awt.Dimension(640, 480));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/upload_pequeno.png"))); // NOI18N
+
+        LblData.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        LblData.setText("Data");
+
+        LblUsuario.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        LblUsuario.setText("Usuário");
+
+        menCad.setText("Cadastro");
+        menCad.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+
+        menCadCli.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        menCadCli.setText("Cliente");
+        menCad.add(menCadCli);
+
+        menCadOs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
+        menCadOs.setText("OS");
+        menCadOs.setPreferredSize(new java.awt.Dimension(121, 25));
+        menCadOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menCadOsActionPerformed(evt);
+            }
+        });
+        menCad.add(menCadOs);
+
+        menCadUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
+        menCadUsuarios.setText("Usuários");
+        menCad.add(menCadUsuarios);
+
+        Menu.add(menCad);
+
+        menRel.setText("Relatório");
+        menRel.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+
+        menRelServ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        menRelServ.setText("Serviços");
+        menRelServ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menRelServActionPerformed(evt);
+            }
+        });
+        menRel.add(menRelServ);
+
+        Menu.add(menRel);
+
+        menAjuda.setText("Ajuda");
+        menAjuda.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+
+        menAjudaSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        menAjudaSobre.setText("Sobre");
+        menAjuda.add(menAjudaSobre);
+
+        Menu.add(menAjuda);
+
+        menOpc.setText("Opções");
+        menOpc.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+
+        menOpcSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
+        menOpcSair.setText("Sair");
+        menOpc.add(menOpcSair);
+
+        Menu.add(menOpc);
+
+        setJMenuBar(Menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(391, 391, 391)
-                .addComponent(jLabel1)
-                .addContainerGap(419, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblUsuario)
+                            .addComponent(LblData)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel2)))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(241, 241, 241)
-                .addComponent(jLabel1)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(LblUsuario)
+                .addGap(52, 52, 52)
+                .addComponent(LblData)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(165, 165, 165))
         );
 
-        setSize(new java.awt.Dimension(927, 572));
+        setSize(new java.awt.Dimension(915, 523));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menCadOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadOsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menCadOsActionPerformed
+
+    private void menRelServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelServActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menRelServActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,6 +197,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JDesktopPane Desktop;
+    private javax.swing.JLabel LblData;
+    private javax.swing.JLabel LblUsuario;
+    private javax.swing.JMenuBar Menu;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu menAjuda;
+    private javax.swing.JMenuItem menAjudaSobre;
+    private javax.swing.JMenu menCad;
+    private javax.swing.JMenuItem menCadCli;
+    private javax.swing.JMenuItem menCadOs;
+    private javax.swing.JMenuItem menCadUsuarios;
+    private javax.swing.JMenu menOpc;
+    private javax.swing.JMenuItem menOpcSair;
+    private javax.swing.JMenu menRel;
+    private javax.swing.JMenuItem menRelServ;
     // End of variables declaration//GEN-END:variables
 }
