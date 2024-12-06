@@ -152,7 +152,7 @@ public class Tela_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_senhaLabelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  String sql ="select * from clientes where login=? and senha=?";
+  String sql ="select * from usuarios where login=? and senha=?";
             
             try{
                 pst = conexao.prepareStatement(sql);
