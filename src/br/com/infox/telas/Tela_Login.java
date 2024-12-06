@@ -63,7 +63,7 @@ public class Tela_Login extends javax.swing.JFrame {
         Senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ordem de Serviço 1.0");
+        setTitle("Login");
         setResizable(false);
 
         Label1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
@@ -146,7 +146,10 @@ public class Tela_Login extends javax.swing.JFrame {
             try{
                 pst = conexao.prepareStatement(sql);
                 pst.setString(1, usuarioLabel.getText());    
-                pst.setString(2, Senha.getText());
+                String captura = new String(Senha.getPassword());
+               
+                pst.setString(2, captura);
+                
                 
                 rs = pst.executeQuery();
                 
@@ -154,6 +157,8 @@ public class Tela_Login extends javax.swing.JFrame {
                     
                      TelaPrincipal principal = new TelaPrincipal();
                      principal.setVisible(true);
+                     this.dispose();
+                     conexao.close();
 //                    JOptionPane.showMessageDialog(null, "Login com Sucesso!");
                 }else{
                      JOptionPane.showMessageDialog(null, "ERRO de login!");

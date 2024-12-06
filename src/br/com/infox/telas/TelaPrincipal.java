@@ -30,6 +30,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ordem de Serviço 1.0");
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabel1.setText("TELA PRINCIPAL");
@@ -39,19 +41,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
+                .addGap(391, 391, 391)
                 .addComponent(jLabel1)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(419, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
+                .addGap(241, 241, 241)
                 .addComponent(jLabel1)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(410, 330));
+        setSize(new java.awt.Dimension(927, 572));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
