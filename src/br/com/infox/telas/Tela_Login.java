@@ -59,8 +59,8 @@ public class Tela_Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         usuarioLabel = new javax.swing.JTextField();
-        senhaLabel = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        Senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ordem de Serviço 1.0");
@@ -79,12 +79,6 @@ public class Tela_Login extends javax.swing.JFrame {
         usuarioLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usuarioLabelActionPerformed(evt);
-            }
-        });
-
-        senhaLabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                senhaLabelActionPerformed(evt);
             }
         });
 
@@ -111,11 +105,10 @@ public class Tela_Login extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(8, 8, 8)))
                 .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(usuarioLabel)
-                        .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(usuarioLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Senha, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -127,15 +120,15 @@ public class Tela_Login extends javax.swing.JFrame {
                     .addComponent(usuarioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(senhaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27))
         );
 
@@ -147,22 +140,21 @@ public class Tela_Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usuarioLabelActionPerformed
 
-    private void senhaLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_senhaLabelActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
   String sql ="select * from usuarios where login=? and senha=?";
             
             try{
                 pst = conexao.prepareStatement(sql);
                 pst.setString(1, usuarioLabel.getText());    
-                pst.setString(2, senhaLabel.getText());
+                pst.setString(2, Senha.getText());
                 
                 rs = pst.executeQuery();
                 
                 if(rs.next()){
-                    JOptionPane.showMessageDialog(null, "Login com Sucesso!");
+                    
+                     TelaPrincipal principal = new TelaPrincipal();
+                     principal.setVisible(true);
+//                    JOptionPane.showMessageDialog(null, "Login com Sucesso!");
                 }else{
                      JOptionPane.showMessageDialog(null, "ERRO de login!");
                     
@@ -171,8 +163,8 @@ public class Tela_Login extends javax.swing.JFrame {
             
                 
             }catch(Exception e){
-                   
-                  System.out.println("ERROR");
+                   JOptionPane.showMessageDialog(null, e);
+//                  System.out.println("ERROR");
                 
             }
                 // TODO add your handling code here:
@@ -215,10 +207,10 @@ public class Tela_Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label1;
+    private javax.swing.JPasswordField Senha;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField senhaLabel;
     private javax.swing.JTextField usuarioLabel;
     // End of variables declaration//GEN-END:variables
 }
