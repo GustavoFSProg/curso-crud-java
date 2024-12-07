@@ -8,6 +8,7 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -154,11 +155,32 @@ public class Tela_Login extends javax.swing.JFrame {
                 rs = pst.executeQuery();
                 
                 if(rs.next()){
+                    String perfil = rs.getString(7);
+                    System.out.println(perfil);
                     
-                     TelaPrincipal principal = new TelaPrincipal();
+                    if(perfil.equals("admin")){
+                        
+                            TelaPrincipal principal = new TelaPrincipal();
                      principal.setVisible(true);
-                     this.dispose();
-                     conexao.close();
+                        TelaPrincipal.menRel.setEnabled(true);       
+                        TelaPrincipal.menCadUsuarios.setEnabled(true);
+                        TelaPrincipal.LblUsuario.setText(rs.getString(2));        
+                        TelaPrincipal.LblUsuario.setForeground(Color.RED);
+
+
+                              this.dispose();
+                    }else{
+                             
+                            TelaPrincipal principal = new TelaPrincipal();
+                     principal.setVisible(true);
+                                             TelaPrincipal.LblUsuario.setText(rs.getString(2));
+
+                           this.dispose();
+                    }
+                    
+                 
+                                    conexao.close();
+
 //                    JOptionPane.showMessageDialog(null, "Login com Sucesso!");
                 }else{
                      JOptionPane.showMessageDialog(null, "ERRO de login!");
