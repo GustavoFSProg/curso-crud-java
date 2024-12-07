@@ -165,7 +165,7 @@ public class Tela_Login extends javax.swing.JFrame {
                         TelaPrincipal.menRel.setEnabled(true);       
                         TelaPrincipal.menCadUsuarios.setEnabled(true);
                         TelaPrincipal.LblUsuario.setText(rs.getString(2));        
-                        TelaPrincipal.LblUsuario.setForeground(Color.RED);   
+                        TelaPrincipal.LblUsuario.setForeground(Color.BLUE);   
                         TelaPrincipal.admin.setText("Administrador");
 
 
@@ -175,6 +175,7 @@ public class Tela_Login extends javax.swing.JFrame {
                             TelaPrincipal principal = new TelaPrincipal();
                      principal.setVisible(true);
                                              TelaPrincipal.LblUsuario.setText(rs.getString(2));
+                                                TelaPrincipal.LblUsuario.setForeground(Color.DARK_GRAY);   
                                                                      TelaPrincipal.admin.setText("Usuário");
 
 

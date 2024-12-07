@@ -88,6 +88,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menCadUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menCadUsuarios.setText("Usuários");
         menCadUsuarios.setEnabled(false);
+        menCadUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menCadUsuariosActionPerformed(evt);
+            }
+        });
         menCad.add(menCadUsuarios);
 
         Menu.add(menCad);
@@ -143,7 +148,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -207,6 +212,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menCadOsActionPerformed
 
+    private void menCadUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadUsuariosActionPerformed
+          // TODO add your handling code here:
+        TelaUsuarios usuario = new  TelaUsuarios();
+                usuario.setVisible(true);
+                Desktop.add(usuario);
+                
+    }//GEN-LAST:event_menCadUsuariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -243,10 +256,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane Desktop;
+    public static javax.swing.JDesktopPane Desktop;
     private javax.swing.JLabel LblData;
     public static javax.swing.JLabel LblUsuario;
-    private javax.swing.JMenuBar Menu;
+    public javax.swing.JMenuBar Menu;
     public static javax.swing.JLabel admin;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu menAjuda;
