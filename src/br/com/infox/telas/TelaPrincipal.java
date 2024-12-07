@@ -5,6 +5,10 @@
  */
 package br.com.infox.telas;
 
+import java.text.DateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author oem
@@ -46,6 +50,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ordem de Serviço 1.0");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         Desktop.setBackground(new java.awt.Color(49, 26, 26));
         Desktop.setPreferredSize(new java.awt.Dimension(640, 480));
@@ -77,11 +86,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menCadUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menCadUsuarios.setText("Usuários");
+        menCadUsuarios.setEnabled(false);
         menCad.add(menCadUsuarios);
 
         Menu.add(menCad);
 
         menRel.setText("Relatório");
+        menRel.setEnabled(false);
         menRel.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
 
         menRelServ.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
@@ -100,6 +111,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menAjudaSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         menAjudaSobre.setText("Sobre");
+        menAjudaSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menAjudaSobreActionPerformed(evt);
+            }
+        });
         menAjuda.add(menAjudaSobre);
 
         Menu.add(menAjuda);
@@ -109,6 +125,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menOpcSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
         menOpcSair.setText("Sair");
+        menOpcSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menOpcSairActionPerformed(evt);
+            }
+        });
         menOpc.add(menOpcSair);
 
         Menu.add(menOpc);
@@ -131,13 +152,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addComponent(jLabel2)))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(53, 53, 53)
@@ -149,17 +170,38 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(165, 165, 165))
         );
 
-        setSize(new java.awt.Dimension(915, 523));
+        setSize(new java.awt.Dimension(943, 589));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menCadOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadOsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menCadOsActionPerformed
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+       Date data = new Date();
+       DateFormat formatador = DateFormat.getDateInstance(DateFormat.MEDIUM);
+       
+       LblData.setText(formatador.format(data));
+               // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
+
+    private void menOpcSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menOpcSairActionPerformed
+        int sair = JOptionPane.showConfirmDialog(null, "Você deseja mesmo sair do app?", "Atenção",  JOptionPane.YES_NO_OPTION);        // TODO add your handling code here:
+        if(sair == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+
+    }//GEN-LAST:event_menOpcSairActionPerformed
+
+    private void menAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menAjudaSobreActionPerformed
+        TelaSobre sobre = new TelaSobre();
+        sobre.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_menAjudaSobreActionPerformed
 
     private void menRelServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelServActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menRelServActionPerformed
+
+    private void menCadOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadOsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menCadOsActionPerformed
 
     /**
      * @param args the command line arguments
