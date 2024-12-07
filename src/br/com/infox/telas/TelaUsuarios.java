@@ -66,7 +66,44 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    
+    private void adicionar(){
+        String sql = "insert into usuarios(name, email,fone,login,senha,perfil) values(?,?,?,?,?,?)";
+        try{
+            pst=conexao.prepareStatement(sql);
+//            pst.setString(1,  IdField.getText());            
+            pst.setString(1, NameField.getText()); 
+            pst.setString(2, EmailField.getText());   
+            pst.setString(3, FoneField.getText());       
+            pst.setString(4, LoginField1.getText());        
+            pst.setString(5, SenhaField.getText());       
+            pst.setString(6, PerfilField.getSelectedItem().toString());     
+            
+            if(NameField.getText().isEmpty() || LoginField1.getText().isEmpty() || SenhaField.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
+                
+                
+            }else{
+            
+             int adicionado =     pst.executeUpdate();
+            
+                          
 
+            if(adicionado > 0){
+                
+               JOptionPane.showMessageDialog(null,"Usuário Castrado com sucesso!");
+                  NameField.setText("");  
+                EmailField.setText("");           
+                FoneField.setText("");
+                LoginField1.setText("");
+                SenhaField.setText("");
+            }
+            }
+             }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,17 +142,17 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
 
         jLabel1.setText("id");
 
-        jLabel2.setText("Nome");
+        jLabel2.setText("* Nome");
 
         jLabel3.setText("Email");
 
-        jLabel4.setText("Login");
+        jLabel4.setText("* Login");
 
         jLabel5.setText("Telefone");
 
-        jLabel6.setText("Perfil");
+        jLabel6.setText("* Perfil");
 
-        jLabel7.setText("Senha");
+        jLabel7.setText("* Senha");
 
         IdField.setPreferredSize(new java.awt.Dimension(25, 31));
 
@@ -155,6 +192,11 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
         AddButton.setToolTipText("Adicionar");
         AddButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         AddButton.setPreferredSize(new java.awt.Dimension(80, 80));
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -271,6 +313,10 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Consultar();
     }//GEN-LAST:event_ReadButtonActionPerformed
+
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+   adicionar();        // TODO add your handling code here:
+    }//GEN-LAST:event_AddButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
