@@ -79,7 +79,7 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
             pst.setString(5, SenhaField.getText());       
             pst.setString(6, PerfilField.getSelectedItem().toString());     
             
-            if(NameField.getText().isEmpty() || LoginField1.getText().isEmpty() || SenhaField.getText().isEmpty()){
+            if(NameField.getText().isEmpty() || LoginField1.getText().isEmpty()   || SenhaField.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
                 
                 
@@ -104,6 +104,79 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
         }
     
     }
+    
+       private void update(){
+           
+             String sql = "update  usuarios  set   name=?, email=?, fone=? , login=? , senha=? ,perfil=? where  id=?";
+             try{
+                  pst= conexao.prepareStatement(sql);
+                  pst.setString(1,  NameField.getText());          
+                  pst.setString(2,  EmailField.getText());       
+                  pst.setString(3, FoneField.getText());    
+                  pst.setString(4, LoginField1.getText());      
+                  pst.setString(5, SenhaField.getText());
+                 pst.setString(6, PerfilField.getSelectedItem().toString());   
+                pst.setString(7, IdField.getText());
+
+      if(NameField.getText().isEmpty() || LoginField1.getText().isEmpty()   || SenhaField.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
+                
+                
+            }else{
+            
+             int adicionado =     pst.executeUpdate();
+            
+                          
+
+            if(adicionado > 0){
+                
+               JOptionPane.showMessageDialog(null,"Usuário Atualizado com sucesso!");
+                  NameField.setText("");  
+                EmailField.setText("");           
+                FoneField.setText("");
+                LoginField1.setText("");
+                SenhaField.setText("");
+            }
+            }
+             }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    
+           
+       }
+       
+       private void deletar(){
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover esse usuário?", "Atenção", JOptionPane.YES_NO_OPTION);
+        
+      if(confirma ==JOptionPane.YES_OPTION)  {
+          String sql = "delete from usuarios where id=?";
+          
+          try{
+              pst=conexao.prepareStatement(sql);
+              pst.setString(1, IdField.getText());
+              
+               int apagado =   pst.executeUpdate();
+               
+               if(apagado > 0){
+                   
+              
+                JOptionPane.showMessageDialog(null,"Usuário deletado com sucesso!");
+              
+              
+                NameField.setText("");  
+                EmailField.setText("");           
+                FoneField.setText("");
+                LoginField1.setText("");
+                SenhaField.setText("");
+                
+                               }
+
+              
+                }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+      }
+       }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -182,11 +255,21 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
         UpdateButton.setToolTipText("Editar");
         UpdateButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         UpdateButton.setPreferredSize(new java.awt.Dimension(80, 80));
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButtonActionPerformed(evt);
+            }
+        });
 
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
         deleteButton.setToolTipText("Deletar");
         deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteButton.setPreferredSize(new java.awt.Dimension(80, 80));
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         AddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/add.png"))); // NOI18N
         AddButton.setToolTipText("Adicionar");
@@ -317,6 +400,14 @@ public class TelaUsuarios extends javax.swing.JInternalFrame {
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
    adicionar();        // TODO add your handling code here:
     }//GEN-LAST:event_AddButtonActionPerformed
+
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
+         update();        // TODO add your handling code here:
+    }//GEN-LAST:event_UpdateButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+     deletar();        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

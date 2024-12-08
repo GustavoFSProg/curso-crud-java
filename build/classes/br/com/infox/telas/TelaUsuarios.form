@@ -289,6 +289,9 @@
               <Dimension value="[80, 80]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="deleteButton">
           <Properties>
@@ -303,6 +306,9 @@
               <Dimension value="[80, 80]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="AddButton">
           <Properties>
