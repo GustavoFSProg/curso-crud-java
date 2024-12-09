@@ -7,6 +7,7 @@ package br.com.infox.telas;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -51,10 +52,8 @@ public class TelaClientes extends javax.swing.JInternalFrame {
             if(adicionado > 0){
                 
                JOptionPane.showMessageDialog(null,"Cliente Cadastrado com sucesso!");
-                  NameField.setText("");  
-                EmailField.setText("");           
-                FoneField.setText("");            
-                EnderecoField.setText("");
+               
+                     limpar_campos();
 
               
             }
@@ -66,7 +65,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     }
      
       public void pesquisar_cliente(){
-          String sql = "select * from clientes where  name like ?";
+          String sql = "select  id as Id, name as Nome, email as Email, fone as Telefone, endereco as Endereço  from clientes where  name like ?";
           try{
                pst=conexao.prepareStatement(sql);
                
@@ -124,10 +123,9 @@ public class TelaClientes extends javax.swing.JInternalFrame {
             if(adicionado > 0){
                 
                JOptionPane.showMessageDialog(null,"Cliente Atualizado com sucesso!");
-                  NameField.setText("");  
-                EmailField.setText("");           
-                FoneField.setText("");
-                 EnderecoField.setText("");
+//              
+               
+               limpar_campos();
                  
                   AddButton.setEnabled(true);
               
@@ -158,11 +156,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
               
                 JOptionPane.showMessageDialog(null,"Usuário deletado com sucesso!");
               
-              
-                NameField.setText("");  
-                EmailField.setText("");           
-                FoneField.setText("");
-               EnderecoField.setText("");
+               limpar_campos();
                
                AddButton.setEnabled(true);
                 
@@ -175,6 +169,14 @@ public class TelaClientes extends javax.swing.JInternalFrame {
       }
        }
        
+       private void limpar_campos(){
+                     NameField.setText("");  
+                EmailField.setText("");           
+                FoneField.setText("");
+                 EnderecoField.setText("");
+                 TxtPesquisar.setText("");
+                 ((DefaultTableModel) TabelaClientes.getModel()).setRowCount(0);
+       }
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -249,17 +251,25 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/lupa.png"))); // NOI18N
 
+        TabelaClientes = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex ){
+                return false ;
+
+            }
+        };
         TabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nome", "Email", "Telefone", "Endereço"
             }
         ));
+        TabelaClientes.setFocusable(false);
+        TabelaClientes.getTableHeader().setReorderingAllowed(false);
         TabelaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabelaClientesMouseClicked(evt);
