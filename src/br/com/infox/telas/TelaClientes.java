@@ -7,6 +7,7 @@ package br.com.infox.telas;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -63,7 +64,35 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         }
     
     }
+     
+      public void pesquisar_cliente(){
+          String sql = "select * from clientes where  name like ?";
+          try{
+               pst=conexao.prepareStatement(sql);
+               
+               pst.setString(1, TxtPesquisar.getText() + "%");
+               
+                     rs= pst.executeQuery();
+                     
+                     TabelaClientes.setModel(DbUtils.resultSetToTableModel(rs));
+          
+              }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+          
+           
+      }
+      
+        public void setar_campos(){
+            int setar = TabelaClientes.getSelectedRow();
+            
+               NameField.setText(TabelaClientes.getModel().getValueAt(setar, 1).toString());  
+               EmailField.setText(TabelaClientes.getModel().getValueAt(setar, 2).toString());     
+               FoneField.setText(TabelaClientes.getModel().getValueAt(setar, 3).toString());
+               EnderecoField.setText(TabelaClientes.getModel().getValueAt(setar, 4).toString());
 
+        }
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,7 +105,6 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         AddButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         UpdateButton = new javax.swing.JButton();
-        ReadButton = new javax.swing.JButton();
         TxtPesquisar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -109,7 +137,6 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         });
 
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
-        deleteButton.setText("Clientes");
         deleteButton.setToolTipText("Deletar");
         deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteButton.setPreferredSize(new java.awt.Dimension(80, 80));
@@ -129,17 +156,11 @@ public class TelaClientes extends javax.swing.JInternalFrame {
             }
         });
 
-        ReadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/read.png"))); // NOI18N
-        ReadButton.setToolTipText("Ler Dados");
-        ReadButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ReadButton.setPreferredSize(new java.awt.Dimension(80, 80));
-        ReadButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ReadButtonActionPerformed(evt);
+        TxtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtPesquisarKeyReleased(evt);
             }
         });
-
-        TxtPesquisar.setText("jTextField1");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/lupa.png"))); // NOI18N
 
@@ -154,6 +175,11 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TabelaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TabelaClientes);
 
         EnderecoField.setPreferredSize(new java.awt.Dimension(25, 31));
@@ -181,11 +207,9 @@ public class TelaClientes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
                 .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ReadButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(83, 83, 83)
                 .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -231,8 +255,8 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                     .addComponent(TxtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -251,7 +275,6 @@ public class TelaClientes extends javax.swing.JInternalFrame {
                     .addComponent(EnderecoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ReadButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,10 +296,13 @@ public class TelaClientes extends javax.swing.JInternalFrame {
 //        update();        // TODO add your handling code here:
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
-    private void ReadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReadButtonActionPerformed
-        // TODO add your handling code here:
-//        Consultar();
-    }//GEN-LAST:event_ReadButtonActionPerformed
+    private void TxtPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPesquisarKeyReleased
+          pesquisar_cliente();        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtPesquisarKeyReleased
+
+    private void TabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaClientesMouseClicked
+      setar_campos();        // TODO add your handling code here:
+    }//GEN-LAST:event_TabelaClientesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -285,7 +311,6 @@ public class TelaClientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField EnderecoField;
     private javax.swing.JTextField FoneField;
     private javax.swing.JTextField NameField;
-    private javax.swing.JButton ReadButton;
     private javax.swing.JTable TabelaClientes;
     private javax.swing.JTextField TxtPesquisar;
     private javax.swing.JButton UpdateButton;
