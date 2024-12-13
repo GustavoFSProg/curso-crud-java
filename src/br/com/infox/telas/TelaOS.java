@@ -215,6 +215,40 @@ public class TelaOS extends javax.swing.JInternalFrame {
     
            
        }
+       
+       
+       private void deletar(){
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover essa OS?", "Atenção", JOptionPane.YES_NO_OPTION);
+        
+      if(confirma ==JOptionPane.YES_OPTION)  {
+          String sql = "delete from os  where id=?";
+          
+          try{
+              pst=conexao.prepareStatement(sql);
+              pst.setString(1, NumeroOS.getText());
+              
+               int apagado =   pst.executeUpdate();
+               
+               if(apagado > 0){
+                   
+              
+                JOptionPane.showMessageDialog(null,"Ordem de Serviço  deletada  com sucesso!");
+              
+               limpar_campos();
+               
+               AddButton.setEnabled(true);
+                
+                               }
+
+              
+                }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+      }
+       }
+       
+       
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -261,6 +295,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         teste = new javax.swing.JLabel();
         IdCliente = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -540,6 +575,13 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
         IdCliente.setEnabled(false);
 
+        jButton2.setText("Ver Oss");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -586,6 +628,10 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(192, 192, 192)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -624,7 +670,9 @@ public class TelaOS extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Servico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -640,7 +688,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-//        deletar();        // TODO add your handling code here:
+       deletar() ;
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
@@ -678,6 +726,12 @@ public class TelaOS extends javax.swing.JInternalFrame {
          limpar_campos();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+   BuscarOs  buscar= new BuscarOs();
+          buscar.setVisible(true);  
+//        Desktop.add(telaVerOS);// TODO add your handling code here:        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
@@ -702,6 +756,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
