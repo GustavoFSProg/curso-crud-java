@@ -122,10 +122,8 @@ public class TelaOS extends javax.swing.JInternalFrame {
                pst=conexao.prepareStatement(sql);
                      rs= pst.executeQuery();
                      
-                     if(rs.next()){
-                         
+                     if(rs.next()){                    
           
-                         
                          NumeroOS.setText(rs.getString(1));         
                          DataOS.setText(rs.getString(2));     
                         ComboBoxSituacao.setSelectedItem(rs.getString(4));       
@@ -135,22 +133,13 @@ public class TelaOS extends javax.swing.JInternalFrame {
                          Tecnico.setText(rs.getString(7));  
                          Valor.setText(rs.getString(8));       
                          IdCliente.setText(rs.getString(9));       
-                         Servico.setText(rs.getString(10));
-
-
-
+                         Servico.setText(rs.getString(10));      
                          
-                       
 
-
-                         
                          
                          String   radioButton = rs.getString(3);
                          
-                       
-                         
-                                 
-                            
+                 
                          if(radioButton.equals("Ordem de Serviço")){
                              
                                   RadioButtonOs.setSelected(true);    
@@ -175,6 +164,55 @@ public class TelaOS extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
           
+           
+       }
+       
+       
+       private void update(){
+           
+             String sql = "update  os  set   tipo=?, situacao =?, equipamento=? , defeito=? , tecnico=?, valor=?,  servico=?  where  id=?";
+             
+          
+             try{
+                 
+            pst= conexao.prepareStatement(sql);
+            pst.setString(1, tipo); 
+            pst.setString(2, ComboBoxSituacao.getSelectedItem().toString());   
+            pst.setString(3, Equipamento.getText());       
+            pst.setString(4, Defeito.getText());        
+            pst.setString(5, Tecnico.getText());       
+            pst.setString(6, Valor.getText());        
+                
+            pst.setString(7, Servico.getText());                         
+            pst.setString(8, NumeroOS.getText());      
+ 
+             
+
+      if(Equipamento.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
+                
+                
+            }else{
+            
+             int adicionado =     pst.executeUpdate();
+            
+                          
+
+            if(adicionado > 0){
+                
+               JOptionPane.showMessageDialog(null,"OS  Atualizado com sucesso!");
+//              
+               
+               limpar_campos();
+                 
+                  AddButton.setEnabled(true);
+              
+            }
+            }
+             }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    
            
        }
 
@@ -379,7 +417,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -500,6 +538,8 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
         teste.setText("Id Cliente");
 
+        IdCliente.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -524,9 +564,9 @@ public class TelaOS extends javax.swing.JInternalFrame {
                                 .addComponent(teste)
                                 .addComponent(jLabel2))
                             .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(ComboBoxSituacao, 0, 231, Short.MAX_VALUE)
-                                .addComponent(IdCliente)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ComboBoxSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(IdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -596,7 +636,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_ReadButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-//        update();        // TODO add your handling code here:
+    update();//        update();        // TODO add your handling code here:
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
