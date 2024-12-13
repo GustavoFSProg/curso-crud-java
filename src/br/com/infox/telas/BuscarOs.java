@@ -33,7 +33,7 @@ public class BuscarOs extends javax.swing.JFrame {
     
     
       public void pesquisar_cliente(){
-          String  sqlCli = "select *    from  clientes where name like ?";
+          String  sqlCli = "select id as id, name as Nome, email  as Email, fone as Telefone, endereco as Endereço    from  clientes where name like ?";
           
               try{
                   
@@ -54,6 +54,45 @@ public class BuscarOs extends javax.swing.JFrame {
         
                         
                               Tabela.setModel(DbUtils.resultSetToTableModel(result));
+                                            
+;
+                  
+                 
+                     
+                 
+
+          
+              }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+          
+          
+                     
+      }
+      
+      
+      public void pesquisar_os(){
+          String  sqlOs = "select *    from  os  where idCli= ?";
+          
+              try{
+                  
+               
+               
+//                     rs= pst.executeQuery();
+                     
+          
+          post=conexao.prepareStatement(sqlOs);      
+          
+                  post.setString(1, IdCli.getText());
+                  
+//                  IdCli.setText(result.getString(1));
+                                 
+                     rs= post.executeQuery();
+                     
+                        
+        
+                        
+                              TabelaOs.setModel(DbUtils.resultSetToTableModel(rs));
                                             
 ;
                   
@@ -113,6 +152,7 @@ public class BuscarOs extends javax.swing.JFrame {
         IdCli = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelaOs = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,7 +188,19 @@ public class BuscarOs extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TabelaOs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TabelaOsKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(TabelaOs);
+
+        jButton1.setText("Ver Ordem de Serviço");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,7 +220,9 @@ public class BuscarOs extends javax.swing.JFrame {
                                     .addComponent(NomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(IdCli, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(IdCli, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(74, 74, 74)
+                                .addComponent(jButton1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -185,11 +239,13 @@ public class BuscarOs extends javax.swing.JFrame {
                 .addComponent(NomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(IdCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IdCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         pack();
@@ -199,6 +255,14 @@ public class BuscarOs extends javax.swing.JFrame {
     private void NomeCliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomeCliKeyReleased
            pesquisar_cliente();
     }//GEN-LAST:event_NomeCliKeyReleased
+
+    private void TabelaOsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabelaOsKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TabelaOsKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     pesquisar_os();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,6 +304,7 @@ public class BuscarOs extends javax.swing.JFrame {
     private javax.swing.JTextField NomeCli;
     private javax.swing.JTable Tabela;
     private javax.swing.JTable TabelaOs;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
