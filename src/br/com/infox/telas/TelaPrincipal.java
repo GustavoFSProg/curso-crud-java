@@ -58,7 +58,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         Desktop.setBackground(new java.awt.Color(49, 26, 26));
-        Desktop.setPreferredSize(new java.awt.Dimension(640, 480));
+        Desktop.setPreferredSize(new java.awt.Dimension(640, 580));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/x-icon-pequeno.jpg"))); // NOI18N
 
@@ -170,7 +170,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(53, 53, 53)
@@ -181,10 +181,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(LblData)
                 .addGap(51, 51, 51)
                 .addComponent(jLabel2)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(943, 589));
+        setSize(new java.awt.Dimension(943, 620));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
