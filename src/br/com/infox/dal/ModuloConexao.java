@@ -19,11 +19,12 @@ public class ModuloConexao {
     
     String driver = "com.mysql.jdbc.Driver";
     
-    String url = "jdbc:mysql://localhost:3306/crud_java";
+    String url = "jdbc:mysql://localhost:3306/crud_java?characterEncoding=utf-8";
     
     String user = "root";
     
     String password = "";
+    
     
     try{
     

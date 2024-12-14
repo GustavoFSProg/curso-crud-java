@@ -5,21 +5,28 @@
  */
 package br.com.infox.telas;
 
+import br.com.infox.dal.ModuloConexao;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author oem
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-
-    /**
+    Connection conexao = null;
+    /**  
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
         initComponents();
+        
+        conexao = ModuloConexao.conector();
     }
 
     /**
@@ -43,6 +50,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menCadUsuarios = new javax.swing.JMenuItem();
         menRel = new javax.swing.JMenu();
         menRelServ = new javax.swing.JMenuItem();
+        CliRelatorio = new javax.swing.JMenuItem();
         menAjuda = new javax.swing.JMenu();
         menAjudaSobre = new javax.swing.JMenuItem();
         menOpc = new javax.swing.JMenu();
@@ -114,6 +122,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menRel.add(menRelServ);
+
+        CliRelatorio.setText("Clientes");
+        CliRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CliRelatorioActionPerformed(evt);
+            }
+        });
+        menRel.add(CliRelatorio);
 
         Menu.add(menRel);
 
@@ -236,6 +252,22 @@ TelaOS os = new TelaOS();
                 
     }//GEN-LAST:event_menCadCliActionPerformed
 
+    private void CliRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CliRelatorioActionPerformed
+           // TODO add your handling code here:
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Impressão?", "Atenção", JOptionPane.YES_NO_OPTION);
+        
+        if(confirma  == JOptionPane.YES_OPTION){
+            try{
+                JasperPrint print =   JasperFillManager.fillReport("/home/oem/Documentos/reports/clientes.jasper",null, conexao);
+                
+                JasperViewer.viewReport(print, false);
+              
+            }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+            }
+        }
+    }//GEN-LAST:event_CliRelatorioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -272,6 +304,7 @@ TelaOS os = new TelaOS();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CliRelatorio;
     public static javax.swing.JDesktopPane Desktop;
     private javax.swing.JLabel LblData;
     public static javax.swing.JLabel LblUsuario;
