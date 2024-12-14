@@ -110,13 +110,14 @@ public class TelaOS extends javax.swing.JInternalFrame {
              IdCliente.setText("");     
              
                  ((DefaultTableModel) TabelaClientes.getModel()).setRowCount(0);
+                 ComboBoxSituacao.setSelectedItem(" ");
        }
        
        
        
        private void pesquisar_os(){
            String  num_os = JOptionPane.showInputDialog("Número da OS");
-           String sql = "select * from os where  id= " + num_os;
+           String sql = "select  id,  date_format(data_os,  '%d/%m/%Y  -  %H:%i') , tipo, situacao, equipamento, defeito, tecnico, valor, idCli, servico   from os where  id= " + num_os;
            
                try{
                pst=conexao.prepareStatement(sql);
@@ -159,6 +160,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
                      }
                      
                      TabelaClientes.setModel(DbUtils.resultSetToTableModel(rs));
+                     
+                     UpdateButton.setEnabled(true);
+                     deleteButton.setEnabled(true);
+                     Imprimir.setEnabled(true);
+                     AddButton.setEnabled(false);
           
               }catch (Exception e){
             JOptionPane.showMessageDialog(null, e);
@@ -206,6 +212,9 @@ public class TelaOS extends javax.swing.JInternalFrame {
                limpar_campos();
                  
                   AddButton.setEnabled(true);
+                     UpdateButton.setEnabled(false);
+                     deleteButton.setEnabled(false);
+                     Imprimir.setEnabled(false);
               
             }
             }
@@ -395,7 +404,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Situação");
 
-        ComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Na Bancada", "Entrega OK", "Orçamento REPROVADO", "Aguardando Aprovação", "Aguardando Peças", "Abandonado pelo Cliente", "Retornou" }));
+        ComboBoxSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Na Bancada", "Entrega OK", "Orçamento REPROVADO", "Aguardando Aprovação", "Aguardando Peças", "Abandonado pelo Cliente", "Retornou" }));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
@@ -452,7 +461,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -494,6 +503,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
         UpdateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/update.png"))); // NOI18N
         UpdateButton.setToolTipText("Editar");
         UpdateButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        UpdateButton.setEnabled(false);
         UpdateButton.setPreferredSize(new java.awt.Dimension(70, 70));
         UpdateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -504,6 +514,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
         deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
         deleteButton.setToolTipText("Deletar");
         deleteButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteButton.setEnabled(false);
         deleteButton.setPreferredSize(new java.awt.Dimension(70, 70));
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -524,6 +535,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
         Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/printer.png"))); // NOI18N
         Imprimir.setToolTipText("Imprimir");
         Imprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Imprimir.setEnabled(false);
         Imprimir.setPreferredSize(new java.awt.Dimension(70, 70));
         Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
