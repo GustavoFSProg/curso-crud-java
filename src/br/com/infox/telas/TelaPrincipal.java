@@ -249,6 +249,11 @@ TelaOS os = new TelaOS();
                 clientes.setVisible(true);
                 Desktop.add(clientes);
                 
+                //SQL
+//                "select OSER.id, data_os, tipo, situacao, equipamento, valor,\n" +
+//"CLI.name, fone from os as OSER inner join clientes as CLI\n" +
+//"on (CLI.id = OSER.idCli);"
+                
                 
     }//GEN-LAST:event_menCadCliActionPerformed
 
@@ -258,7 +263,7 @@ TelaOS os = new TelaOS();
         
         if(confirma  == JOptionPane.YES_OPTION){
             try{
-                JasperPrint print =   JasperFillManager.fillReport("/home/oem/Documentos/reports/clientes.jasper",null, conexao);
+                JasperPrint print =   JasperFillManager.fillReport("/home/oem/reports/ClientesOS.jasper",null, conexao);
                 
                 JasperViewer.viewReport(print, false);
               
