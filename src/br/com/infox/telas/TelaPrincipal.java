@@ -226,7 +226,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menAjudaSobreActionPerformed
 
     private void menRelServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelServActionPerformed
-        // TODO add your handling code here:
+           int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Impressão?", "Atenção", JOptionPane.YES_NO_OPTION);
+        
+        if(confirma  == JOptionPane.YES_OPTION){
+            try{
+                JasperPrint print =   JasperFillManager.fillReport("/home/oem/reports/Servicos.jasper",null, conexao);
+                
+                JasperViewer.viewReport(print, false);
+              
+            }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+            }
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_menRelServActionPerformed
 
     private void menCadOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadOsActionPerformed
