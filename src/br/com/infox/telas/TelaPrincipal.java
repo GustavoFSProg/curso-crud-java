@@ -274,7 +274,7 @@ TelaOS os = new TelaOS();
         
         if(confirma  == JOptionPane.YES_OPTION){
             try{
-                JasperPrint print =   JasperFillManager.fillReport("/home/oem/reports/ClientesOS.jasper",null, conexao);
+                JasperPrint print =   JasperFillManager.fillReport("/home/oem/reports/clientes.jasper",null, conexao);
                 
                 JasperViewer.viewReport(print, false);
               

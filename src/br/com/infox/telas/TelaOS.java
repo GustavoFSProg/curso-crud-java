@@ -82,7 +82,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
             if(ID.getText().isEmpty() ||  Equipamento.getText().isEmpty() || Defeito.getText().isEmpty())                  
                      {
                 JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
-                
+                  
                 
             }else{
             
@@ -91,8 +91,10 @@ public class TelaOS extends javax.swing.JInternalFrame {
                           
 
             if(adicionado > 0){
+                  Imprimir.setEnabled(true);
                 
                JOptionPane.showMessageDialog(null,"OS Emitida com sucesso!");
+               recuperar_os(); 
                 limpar_campos();
             }
             }
@@ -218,7 +220,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
                   AddButton.setEnabled(true);
                      UpdateButton.setEnabled(false);
                      deleteButton.setEnabled(false);
-                     Imprimir.setEnabled(false);
+//                     Imprimir.setEnabled(false);
               
             }
             }
@@ -279,6 +281,28 @@ public class TelaOS extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,e);
             }
         }
+       }
+       
+       private void recuperar_os(){
+           String  sql = "select max(id) from os";
+           
+           try{
+                pst=conexao.prepareStatement(sql);
+//              pst.setString(1, NumeroOS.getText());
+              
+              rs=pst.executeQuery();
+              
+              if(rs.next()){
+                  NumeroOS.setText(rs.getString(1));
+              }
+              
+              
+           }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+              
+              
+           }
+           
        }
        
        
